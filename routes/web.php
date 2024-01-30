@@ -1,9 +1,11 @@
 <?php
 
-use App\Models\Appointment;
-use App\Models\Employee;
+use App\Bookings\ScheduleAvailability;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $availability = (new ScheduleAvailability())
+        ->forPeriod();
+
+    // return view('welcome');
 });
