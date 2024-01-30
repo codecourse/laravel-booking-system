@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $availability = (new ScheduleAvailability())
-        ->forPeriod();
+        ->forPeriod(
+            now()->startOfDay(),
+            now()->addMonth()->endOfDay(),
+        );
 
     // return view('welcome');
 });
