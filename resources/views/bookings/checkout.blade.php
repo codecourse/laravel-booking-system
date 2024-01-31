@@ -21,7 +21,15 @@
         </div>
         <div>
             <h2 class="text-lg font-medium mt-3">1. When for?</h2>
-            <div>
+
+            <div
+                x-data="{
+                    picker: null,
+                }"
+                x-init="
+                    picker = 'abc'
+                "
+            >
                 calendar
             </div>
         </div>
