@@ -1,5 +1,12 @@
 <x-app-layout>
-    <div class="space-y-12">
+    <div
+        x-data="{
+            form: {
+                date: null
+            }
+        }"
+        class="space-y-12"
+    >
         <div>
             <h2 class="text-xl font-medium mt-3">Here's what you're booking</h2>
             <div class="flex mt-6 space-x-3 bg-slate-100 rounded-lg p-4">
@@ -63,7 +70,8 @@
                         }
                     })
 
-                    this.picker.on('select', () => {
+                    this.picker.on('select', (e) => {
+                        form.date = new easepick.DateTime(e.detail.date).format('YYYY-MM-DD')
                         $dispatch('slots-requested')
                     })
 
@@ -80,7 +88,9 @@
             x-data="{
                 slots: [],
                 fetchSlots (event) {
-                    console.log('fetch slots')
+                    axios.get(`{{ route('slots', [$employee, $service]) }}?date=${form.date}`).then((response) => {
+                        this.slots = response.data.times
+                    })
                 }
             }"
             x-on:slots-requested.window="fetchSlots(event)"
