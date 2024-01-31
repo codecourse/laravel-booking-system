@@ -62,9 +62,32 @@
                             })
                         }
                     })
+
+                    this.picker.on('select', () => {
+                        $dispatch('slots-requested')
+                    })
+
+                    $nextTick(() => {
+                        this.picker.trigger('select', { date: '{{ $firstAvailableDate }}' })
+                    })
                 "
             >
                 <input x-ref="date" class="mt-6 text-sm bg-slate-100 border-0 rounded-lg px-6 py-4 w-full" placeholder="Choose a date">
+            </div>
+        </div>
+
+        <div
+            x-data="{
+                slots: [],
+                fetchSlots (event) {
+                    console.log('fetch slots')
+                }
+            }"
+            x-on:slots-requested.window="fetchSlots(event)"
+        >
+            <h2 class="text-lg font-medium mt-3">2. Choose a time slot</h2>
+            <div class="mt-6">
+                slots
             </div>
         </div>
     </div>
