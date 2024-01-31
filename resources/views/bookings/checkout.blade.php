@@ -25,6 +25,7 @@
             <div
                 x-data="{
                     picker: null,
+                    availableDates: {{ json_encode($availableDates) }}
                 }"
                 x-init="
                     this.picker = new easepick.create({
@@ -34,7 +35,16 @@
                         date: '{{ $firstAvailableDate }}',
                         css: [
                             'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
-                        ]
+                        ],
+                        plugins: [
+                            'LockPlugin'
+                        ],
+                        LockPlugin: {
+                            minDate: new Date(),
+                            filter (date, picked) {
+                                return !Object.keys(availableDates).includes(date.format('YYYY-MM-DD'))
+                            }
+                        }
                     })
                 "
             >
