@@ -6,7 +6,7 @@ use App\Http\Controllers\CheckoutController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
-// Carbon::setTestNow(now()->addDay()->setTimeFromTimeString('09:00:00'));
+Carbon::setTestNow(now()->addDay()->setTimeFromTimeString('15:30:00'));
 
 Route::get('/', BookingController::class)->name('bookings');
 Route::get('/bookings/{employee:slug}', BookingEmployeeController::class)->name('bookings.employee');
