@@ -1,13 +1,20 @@
 <x-app-layout>
-    <div
+    <form
+        x-on:submit.prevent="submit"
         x-data="{
             form: {
-                employee: {{ $employee->id }},
-                service: {{ $service->id }},
+                employee_id: {{ $employee->id }},
+                service_id: {{ $service->id }},
                 date: null,
                 time: null,
                 name: null,
                 email: null
+            },
+
+            submit () {
+                axios.post('{{ route('appointments') }}', this.form).then((response) => {
+                    console.log(response.data)
+                })
             }
         }"
         class="space-y-12"
@@ -111,7 +118,7 @@
 
         <div>
             <h2 class="text-lg font-medium mt-3">3. Your details and book</h2>
-            <div class="mt-6">
+            <div class="mt-6" x-show="form.time" x-cloak>
                 <div>
                     <label for="name" class="sr-only">Your name</label>
                     <input type="text" name="name" id="name" placeholder="Your name" class="mt-1 text-sm bg-slate-100 border-0 rounded-lg px-6 py-4 w-full" required x-model="form.name">
@@ -125,5 +132,5 @@
                 <button type="submit" class="mt-6 py-3 px-6 text-sm border border-slate-200 rounded-lg flex flex-col items-center justify-center text-center hover:bg-slate-900 cursor-pointer bg-slate-800 text-white font-medium">Make booking</button>
             </div>
         </div>
-    </div>
+    </form>
 </x-app-layout>
