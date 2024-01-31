@@ -2,7 +2,8 @@
     <div
         x-data="{
             form: {
-                date: null
+                date: null,
+                time: null
             }
         }"
         class="space-y-12"
@@ -96,8 +97,12 @@
             x-on:slots-requested.window="fetchSlots(event)"
         >
             <h2 class="text-lg font-medium mt-3">2. Choose a time slot</h2>
-            <div class="mt-6">
-                slots
+            <div class="mt-6" x-show="slots.length">
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-8 mt-6">
+                    <template x-for="slot in slots">
+                        <div x-text="slot" class="py-3 px-4 text-sm border border-slate-200 rounded-lg text-center hover:bg-gray-50/75 cursor-pointer" x-on:click="form.time = slot" x-bind:class="{ 'bg-slate-100 hover:bg-slate-100': form.time === slot }"></div>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
