@@ -2,8 +2,12 @@
     <div
         x-data="{
             form: {
+                employee: {{ $employee->id }},
+                service: {{ $service->id }},
                 date: null,
-                time: null
+                time: null,
+                name: null,
+                email: null
             }
         }"
         class="space-y-12"
@@ -29,7 +33,6 @@
         </div>
         <div>
             <h2 class="text-lg font-medium mt-3">1. When for?</h2>
-
             <div
                 x-data="{
                     picker: null,
@@ -103,6 +106,23 @@
                         <div x-text="slot" class="py-3 px-4 text-sm border border-slate-200 rounded-lg text-center hover:bg-gray-50/75 cursor-pointer" x-on:click="form.time = slot" x-bind:class="{ 'bg-slate-100 hover:bg-slate-100': form.time === slot }"></div>
                     </template>
                 </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-lg font-medium mt-3">3. Your details and book</h2>
+            <div class="mt-6">
+                <div>
+                    <label for="name" class="sr-only">Your name</label>
+                    <input type="text" name="name" id="name" placeholder="Your name" class="mt-1 text-sm bg-slate-100 border-0 rounded-lg px-6 py-4 w-full" required x-model="form.name">
+                </div>
+
+                <div class="mt-3">
+                    <label for="email" class="sr-only">Your email address</label>
+                    <input type="email" name="email" id="email" placeholder="Your email address" class="mt-1 text-sm bg-slate-100 border-0 rounded-lg px-6 py-4 w-full" required x-model="form.email">
+                </div>
+
+                <button type="submit" class="mt-6 py-3 px-6 text-sm border border-slate-200 rounded-lg flex flex-col items-center justify-center text-center hover:bg-slate-900 cursor-pointer bg-slate-800 text-white font-medium">Make booking</button>
             </div>
         </div>
     </div>
