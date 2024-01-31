@@ -9,7 +9,7 @@ class BookingController extends Controller
 {
     public function __invoke()
     {
-        return view('booking', [
+        return view('bookings.index', [
             'employees' => Employee::get(),
         ]);
     }
