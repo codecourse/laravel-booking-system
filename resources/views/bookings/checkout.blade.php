@@ -15,7 +15,7 @@
 
             submit () {
                 axios.post('{{ route('appointments') }}', this.form).then((response) => {
-                    console.log(response.data)
+                    window.location = response.data.redirect
                 }).catch((error) => {
                     this.error = error.response.data.error
                 })

@@ -29,11 +29,15 @@ class AppointmentController extends Controller
             ], 409);
         }
 
-        Appointment::create(
+        $appointment = Appointment::create(
             $request->only('employee_id', 'service_id', 'name', 'email') + [
                 'starts_at' => $date = Carbon::parse($request->date)->setTimeFromTimeString($request->time),
                 'ends_at' => $date->copy()->addMinutes($service->duration),
             ]
         );
+
+        return response()->json([
+            'redirect' => route('confirmation', $appointment)
+        ]);
     }
 }
