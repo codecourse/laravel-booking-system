@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentDestroyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingEmployeeController;
 use App\Http\Controllers\CheckoutController;
@@ -18,5 +19,6 @@ Route::get('/checkout/{employee:slug}/{service:slug}', CheckoutController::class
 Route::get('/slots/{employee:slug}/{service:slug}', SlotController::class)->name('slots');
 
 Route::post('/appointments', AppointmentController::class)->name('appointments');
+Route::delete('/appointments/{appointment}', AppointmentDestroyController::class)->name('appointments.destroy');
 
 Route::get('/confirmation/{appointment:uuid}', ConfirmationController::class)->name('confirmation');

@@ -30,7 +30,7 @@
                 <div class="w-full">
                     <div class="flex justify-between">
                         <div class="font-semibold">
-                            {{ $service->title }}
+                            {{ $service->title }} ({{ $service->duration }} minutes)
                         </div>
                         <div class="text-sm">
                             {{ $service->price }}
